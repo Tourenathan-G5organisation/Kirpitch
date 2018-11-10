@@ -4,10 +4,14 @@
     <string name="edit_text_password">Password</string>
     <string name="button_login">LOGIN</string>
     <string name="button_register">REGISTER</string>
-    <string name="button_logout">LOGOUT</string>
-    <string name="button_deleteAccount">DELETE USER</string>
     <string name="facebook_login_picture">"facebook_login_button"</string>
     <string name="google_login_picture">google_login_button</string>
     <string name="minimum_password">Password must be of 6 caracter minimum</string>
     <string name="auth_failed">Autentification Failed: login or password is wrong</string>
+    <string name="button_nav_logout">LOGOUT</string>
+    <string name="button_nav_deleteAccount">DELETE ACCOUNT</string>
+
+    <string name="navigation_drawerl_open">Open navigation drawer</string>
+    <string name="navigation_drawerl_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
 </resources>
