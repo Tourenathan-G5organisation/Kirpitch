@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "722584183565",
+    "firebase_url": "https://kirpitch-207ac.firebaseio.com",
+    "project_id": "kirpitch-207ac",
+    "storage_bucket": "kirpitch-207ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722584183565:android:5c7f5a09584fb47b",
+        "android_client_info": {
+          "package_name": "com.example.android.kirpitch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722584183565-matl5i5osgk4gmnf88al6cb7npc8m0hm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.kirpitch",
+            "certificate_hash": "d91c399aaf21f976da14adbf91764f4ede793d1d"
+          }
+        },
+        {
+          "client_id": "722584183565-m7btov83ol2ak5tdnml7uagt8m429qtb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-6IVfvpW-ZotVW9afW4Up9IiaeuUzhL0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722584183565-m7btov83ol2ak5tdnml7uagt8m429qtb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
