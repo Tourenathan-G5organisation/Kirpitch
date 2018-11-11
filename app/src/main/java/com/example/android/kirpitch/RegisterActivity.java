@@ -59,8 +59,6 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "registerPassword must be at least 6 characters", Toast.LENGTH_SHORT).show();
                 }
 
-                Log.d("-------:REmail", registerEmailString);
-                Log.d("-------:RPassword", registerPasswordString);
                 firebaseAuth.createUserWithEmailAndPassword(registerEmailString, registerPasswordString)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
