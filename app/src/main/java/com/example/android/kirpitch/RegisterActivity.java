@@ -79,11 +79,13 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
             }
         });
 
         if(firebaseAuth.getCurrentUser()!=null){
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
         }
 
     }
