@@ -1,6 +1,5 @@
 package com.example.android.kirpitch;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -30,7 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
 
     private RecyclerView recyclerView;
@@ -49,12 +48,16 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Your action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Snackbar
+                        .make(v, "Your action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
 
-        DrawerLayout drawerL = findViewById(R.id.nav_drawerlayout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerL, toolbar, R.string.navigation_drawerl_open, R.string.navigation_drawerl_close);
+        DrawerLayout drawerL = findViewById(R.id.nav_drawer_layout);
+        ActionBarDrawerToggle toggle =
+                new ActionBarDrawerToggle(this, drawerL, toolbar
+                        , R.string.navigation_drawer_l_open, R.string.navigation_drawer_l_close);
 
         drawerL.addDrawerListener(toggle);
         toggle.syncState();
@@ -70,7 +73,8 @@ public class MainActivity extends AppCompatActivity
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user == null) {
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    startActivity(new Intent(getApplicationContext()
+                            , LoginActivity.class));
                     finish();
                 }
             }
@@ -88,14 +92,22 @@ public class MainActivity extends AppCompatActivity
 
     private void initializeData() {
         applications = new ArrayList<>();
-        applications.add(new Application("Software Engineer", "New"));
-        applications.add(new Application("Android Developer", "Cancel"));
-        applications.add(new Application("Software Engineer", "New"));
-        applications.add(new Application("Android Developer", "Cancel"));
-        applications.add(new Application("Software Engineer", "New"));
-        applications.add(new Application("Android Developer", "Cancel"));
-        applications.add(new Application("Software Engineer", "New"));
-        applications.add(new Application("Android Developer", "Cancel"));
+        applications
+                .add(new Application("Software Engineer", "New"));
+        applications
+                .add(new Application("Android Developer", "Cancel"));
+        applications
+                .add(new Application("Software Engineer", "New"));
+        applications
+                .add(new Application("Android Developer", "Cancel"));
+        applications
+                .add(new Application("Software Engineer", "New"));
+        applications
+                .add(new Application("Android Developer", "Cancel"));
+        applications
+                .add(new Application("Software Engineer", "New"));
+        applications
+                .add(new Application("Android Developer", "Cancel"));
     }
 
     private void initializeAdapter() {
@@ -119,7 +131,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.nav_drawerlayout);
+        DrawerLayout drawer = findViewById(R.id.nav_drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -137,7 +149,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -146,7 +157,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_logout) {
 
             FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            startActivity(new Intent(getApplicationContext()
+                    , LoginActivity.class));
             finish();
 
         } else if (id == R.id.nav_delete) {
@@ -158,8 +170,12 @@ public class MainActivity extends AppCompatActivity
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "User deleted", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                                    Toast
+                                            .makeText(getApplicationContext()
+                                                    , "User deleted", Toast.LENGTH_SHORT)
+                                            .show();
+                                    startActivity(new Intent(getApplicationContext()
+                                            , RegisterActivity.class));
                                     finish();
                                 }
                             }
@@ -168,7 +184,7 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = findViewById(R.id.nav_drawerlayout);
+        DrawerLayout drawer = findViewById(R.id.nav_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

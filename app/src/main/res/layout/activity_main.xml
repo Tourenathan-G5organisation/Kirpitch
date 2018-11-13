@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/nav_drawerlayout"
+        android:id="@+id/nav_drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -43,9 +43,7 @@
             app:headerLayout="@layout/navigation_header"
             app:menu="@menu/my_navigation_items" />
 
-
     </androidx.drawerlayout.widget.DrawerLayout>
-
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -60,11 +58,11 @@
             android:backgroundTint="#4199cb"
             android:scaleType="center"
             android:tint="#cb4154"
+            android:elevation="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@android:drawable/ic_input_add" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

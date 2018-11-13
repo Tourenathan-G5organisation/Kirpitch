@@ -22,10 +22,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    TextInputEditText registerEmail, registerPassword;
-    Button loginButton, registerButton;
+    private TextInputEditText registerEmail;
+    private TextInputEditText registerPassword;
 
-    FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,8 +34,8 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         registerEmail = findViewById(R.id.e_mail);
         registerPassword = findViewById(R.id.password);
-        registerButton = findViewById(R.id.button_registerRA) ;
-        loginButton = findViewById(R.id.button_loginRA);
+        Button registerButton = findViewById(R.id.button_registerRA);
+        Button loginButton = findViewById(R.id.button_loginRA);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -43,31 +43,50 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String registerEmailString = Objects.requireNonNull(registerEmail.getText()).toString();
-                String registerPasswordString = Objects.requireNonNull(registerPassword.getText()).toString();
+                String registerEmailString = Objects
+                        .requireNonNull(registerEmail.getText()).toString();
+                String registerPasswordString = Objects
+                        .requireNonNull(registerPassword.getText()).toString();
 
                 if(TextUtils.isEmpty(registerEmailString)){
-                    Toast.makeText(getApplicationContext(),"Please fill in the email", Toast.LENGTH_SHORT).show();
+                    Toast
+                            .makeText(getApplicationContext()
+                                    , "Please fill in the email", Toast.LENGTH_SHORT)
+                            .show();
                     return;
                 }
                 if(TextUtils.isEmpty(registerPasswordString)){
-                    Toast.makeText(getApplicationContext(), "Please fill in the passeword", Toast.LENGTH_SHORT).show();
+                    Toast
+                            .makeText(getApplicationContext()
+                                    , "Please fill in the passeword"
+                                    , Toast.LENGTH_SHORT)
+                            .show();
                     return;
                 }
                 if(registerPasswordString.length()<6){
-                    Toast.makeText(getApplicationContext(), "registerPassword must be at least 6 characters", Toast.LENGTH_SHORT).show();
+                    Toast
+                            .makeText(getApplicationContext()
+                                    , "Password must be at least 6 characters"
+                                    , Toast.LENGTH_SHORT)
+                            .show();
                 }
 
-                firebaseAuth.createUserWithEmailAndPassword(registerEmailString, registerPasswordString)
+                firebaseAuth
+                        .createUserWithEmailAndPassword(registerEmailString, registerPasswordString)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    startActivity(new Intent(getApplicationContext()
+                                            , MainActivity.class));
                                     finish();
                                 }
                                 else {
-                                    Toast.makeText(getApplicationContext(), "E-mail or registerPassword is wrong", Toast.LENGTH_SHORT).show();
+                                    Toast
+                                            .makeText(getApplicationContext()
+                                                    , "E-mail or Password is wrong"
+                                                    , Toast.LENGTH_SHORT)
+                                            .show();
                                 }
                             }
                         });

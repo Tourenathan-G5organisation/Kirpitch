@@ -25,15 +25,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextInputEditText loginEmail, loginPassword;
-    Button loginButton, registerButton;
-    FirebaseAuth firebaseAuth;
+    private TextInputEditText loginEmail;
+    private TextInputEditText loginPassword;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
         if (firebaseAuth.getCurrentUser() != null) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -44,8 +43,8 @@ public class LoginActivity extends AppCompatActivity {
 
         loginEmail = findViewById(R.id.e_mailLA);
         loginPassword = findViewById(R.id.passwordLA);
-        loginButton = findViewById(R.id.button_loginLA);
-        registerButton = findViewById(R.id.button_registerLA);
+        Button loginButton = findViewById(R.id.button_loginLA);
+        Button registerButton = findViewById(R.id.button_registerLA);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -57,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        final FirebaseAuth finalFirebaseAuth = firebaseAuth;
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,29 +64,43 @@ public class LoginActivity extends AppCompatActivity {
                 final String password = Objects.requireNonNull(loginPassword.getText()).toString();
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Fill in the email!", Toast.LENGTH_SHORT).show();
+                    Toast
+                            .makeText(getApplicationContext()
+                                    , "Fill in the email!", Toast.LENGTH_SHORT)
+                            .show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Fill in the password!", Toast.LENGTH_SHORT).show();
+                    Toast
+                            .makeText(getApplicationContext()
+                                    , "Fill in the password!", Toast.LENGTH_SHORT)
+                            .show();
                     return;
                 }
 
-                firebaseAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                finalFirebaseAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(LoginActivity.this
+                                , new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
                                 if (!task.isSuccessful()) {
                                     Log.d("----: fail", "failed");
                                     if (password.length() < 6) {
-                                        loginPassword.setError(getString(R.string.minimum_password));
+                                        loginPassword
+                                                .setError(getString(R.string.minimum_password));
                                     } else {
-                                        Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
+                                        Toast
+                                                .makeText(LoginActivity.this
+                                                        , getString(R.string.auth_failed)
+                                                        , Toast.LENGTH_LONG)
+                                                .show();
                                     }
                                 } else {
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    Intent intent =
+                                            new Intent(LoginActivity.this
+                                                    , MainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
