@@ -42,11 +42,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordLA"
-            app:passwordToggleEnabled="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/edit_text_password"
             android:inputType="textPassword"
-            android:hint="@string/edit_text_password" />
+            app:passwordToggleEnabled="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,6 +56,7 @@
         android:layout_height="@dimen/option_size"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
+        android:background="#cb4154"
         android:text="@string/button_login"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/button_registerLA"
@@ -70,6 +71,7 @@
         android:layout_height="@dimen/option_size"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
+        android:background="#cb4154"
         android:text="@string/button_register"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/login_facebook"
@@ -79,10 +81,10 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageView
-        android:contentDescription="@string/facebook_login_picture"
         android:id="@+id/login_facebook"
         android:layout_width="@dimen/option_size"
         android:layout_height="@dimen/option_size"
+        android:contentDescription="@string/facebook_login_picture"
         android:src="@drawable/facebook"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -91,10 +93,10 @@
         app:layout_constraintVertical_bias="0.9" />
 
     <ImageView
-        android:contentDescription="@string/google_login_picture"
         android:id="@+id/login_google"
         android:layout_width="@dimen/option_size"
         android:layout_height="@dimen/option_size"
+        android:contentDescription="@string/google_login_picture"
         android:src="@drawable/google"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/login_facebook"

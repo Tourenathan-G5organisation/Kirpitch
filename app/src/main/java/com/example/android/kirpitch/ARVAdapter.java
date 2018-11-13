@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewHolder> {
 
-    List<Application> applications;
+    private List<Application> applications;
 
     ARVAdapter(List<Application> applications) {
         this.applications = applications;
@@ -28,8 +28,7 @@ public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewH
     @Override
     public ApplicationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.application_item, parent, false);
-        ApplicationViewHolder aViewHolder = new ApplicationViewHolder(v);
-        return aViewHolder;
+        return new ApplicationViewHolder(v);
     }
 
     @Override
@@ -43,7 +42,7 @@ public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewH
         return applications.size();
     }
 
-    public static class ApplicationViewHolder extends RecyclerView.ViewHolder {
+    static class ApplicationViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
         TextView applicationName;

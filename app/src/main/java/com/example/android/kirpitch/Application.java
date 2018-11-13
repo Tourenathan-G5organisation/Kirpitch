@@ -1,6 +1,6 @@
 package com.example.android.kirpitch;
 
-public class Application {
+class Application {
 
     String application_name;
     String application_status;

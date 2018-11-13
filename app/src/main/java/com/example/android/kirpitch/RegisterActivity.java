@@ -4,10 +4,7 @@ package com.example.android.kirpitch;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -16,6 +13,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,8 +43,8 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String registerEmailString = registerEmail.getText().toString();
-                String registerPasswordString = registerPassword.getText().toString();
+                String registerEmailString = Objects.requireNonNull(registerEmail.getText()).toString();
+                String registerPasswordString = Objects.requireNonNull(registerPassword.getText()).toString();
 
                 if(TextUtils.isEmpty(registerEmailString)){
                     Toast.makeText(getApplicationContext(),"Please fill in the email", Toast.LENGTH_SHORT).show();

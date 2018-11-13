@@ -2,11 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/nav_drawerlayout"
@@ -25,8 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="?attr/actionBarSize"
-            android:background="#FFFFFF"></androidx.recyclerview.widget.RecyclerView>
+            android:background="#FFFFFF">
 
+        </androidx.recyclerview.widget.RecyclerView>
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation"
@@ -36,6 +35,7 @@
             android:fitsSystemWindows="false"
             android:layout_marginTop="?attr/actionBarSize"
             app:headerLayout="@layout/navigation_header"
+            android:background="#EE41cb73"
             app:menu="@menu/my_navigation_items" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
