@@ -10,7 +10,12 @@
         android:id="@+id/nav_drawerlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:fitsSystemWindows="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         tools:openDrawer="start">
 
         <include
@@ -32,13 +37,34 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:fitsSystemWindows="false"
             android:layout_marginTop="?attr/actionBarSize"
-            app:headerLayout="@layout/navigation_header"
             android:background="#EE41cb73"
+            android:fitsSystemWindows="false"
+            app:headerLayout="@layout/navigation_header"
             app:menu="@menu/my_navigation_items" />
 
+
     </androidx.drawerlayout.widget.DrawerLayout>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:backgroundTint="#4199cb"
+            android:scaleType="center"
+            android:tint="#cb4154"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
