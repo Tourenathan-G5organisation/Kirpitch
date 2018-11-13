@@ -1,22 +1,11 @@
 package com.example.android.kirpitch;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,6 +17,15 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -56,8 +54,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         DrawerLayout drawerL = findViewById(R.id.nav_drawerlayout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerL, toolbar, R.string.navigation_drawerl_open, R.string.navigation_drawerl_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerL, toolbar, R.string.navigation_drawerl_open, R.string.navigation_drawerl_close);
 
         drawerL.addDrawerListener(toggle);
         toggle.syncState();
@@ -80,10 +77,9 @@ public class MainActivity extends AppCompatActivity
         };
 
         recyclerView = findViewById(R.id.recycle_view);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setHasFixedSize(true);
 
         initializeData();
         initializeAdapter();
@@ -92,6 +88,12 @@ public class MainActivity extends AppCompatActivity
 
     private void initializeData() {
         applications = new ArrayList<>();
+        applications.add(new Application("Software Engineer", "New"));
+        applications.add(new Application("Android Developer", "Cancel"));
+        applications.add(new Application("Software Engineer", "New"));
+        applications.add(new Application("Android Developer", "Cancel"));
+        applications.add(new Application("Software Engineer", "New"));
+        applications.add(new Application("Android Developer", "Cancel"));
         applications.add(new Application("Software Engineer", "New"));
         applications.add(new Application("Android Developer", "Cancel"));
     }
@@ -125,11 +127,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public boolean onCreateOptionMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
@@ -142,13 +139,13 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         int id = item.getItemId();
 
         if (id == R.id.nav_logout) {
 
-            firebaseAuth.getInstance().signOut();
+            FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             finish();
 

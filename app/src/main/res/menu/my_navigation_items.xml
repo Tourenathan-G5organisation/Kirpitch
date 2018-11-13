@@ -13,6 +13,7 @@
             android:id="@+id/nav_delete"
             android:icon="@drawable/ic_baseline_delete_24px"
             android:title="@string/button_nav_deleteAccount" />
+
     </group>
 
 </menu>

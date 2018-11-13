@@ -5,18 +5,8 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:background="#FFFFFF"
-        card_view:cardCornerRadius="6dp">
-
-    </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/nav_drawerlayout"
@@ -29,6 +19,14 @@
             layout="@layout/app_bar_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:background="#FFFFFF"></androidx.recyclerview.widget.RecyclerView>
+
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation"
