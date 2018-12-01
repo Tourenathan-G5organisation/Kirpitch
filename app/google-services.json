@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "602463720938",
+    "firebase_url": "https://test-5295e.firebaseio.com",
+    "project_id": "test-5295e",
+    "storage_bucket": "test-5295e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602463720938:android:5c7f5a09584fb47b",
+        "android_client_info": {
+          "package_name": "com.example.android.kirpitch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602463720938-81m8jgb5s9bns2nj7uqumrsrdflijh0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-sHtG_-LBuiEEQ-iCwmAiC8Z7dYoK07g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

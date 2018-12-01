@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Kirpitch</string>
+    <string name="edit_text_email">E-mail</string>
+    <string name="edit_text_password">Password</string>
+    <string name="button_login">LOGIN</string>
+    <string name="button_register">REGISTER</string>
+    <string name="facebook_login_picture">"facebook_login_button"</string>
+    <string name="google_login_picture">google_login_button</string>
+    <string name="minimum_password">Password must be of 6 characters minimum</string>
+    <string name="auth_failed">Authentication Failed: login or password is wrong</string>
+    <string name="button_nav_logout">LOGOUT</string>
+    <string name="button_nav_deleteAccount">DELETE ACCOUNT</string>
+    <string name="menu_title">Actions Menu</string>
+
+    <string name="navigation_drawer_l_open">Open navigation drawer</string>
+    <string name="navigation_drawer_l_close">Close navigation drawer</string>
 </resources>

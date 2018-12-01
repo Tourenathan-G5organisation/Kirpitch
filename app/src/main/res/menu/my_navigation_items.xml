@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_baseline_exit_to_app_24px"
+            android:title="@string/button_nav_logout" />
+        <item
+            android:id="@+id/nav_delete"
+            android:icon="@drawable/ic_baseline_delete_24px"
+            android:title="@string/button_nav_deleteAccount" />
+
+    </group>
+
+</menu>
