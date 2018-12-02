@@ -1,56 +1,83 @@
 package com.example.android.kirpitch;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.android.kirpitch.model.Task;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewHolder> {
 
-    private final List<Application> applications;
+    private List<Task> mData;
+    Context mContext;
 
-    ARVAdapter(List<Application> applications) {
-        this.applications = applications;
+    ARVAdapter(Context context) {
+        mContext = context;
     }
+
 
     @NonNull
     @Override
     public ApplicationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.application_item, parent, false);
+                .inflate(R.layout.task_item_layout, parent, false);
         return new ApplicationViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ApplicationViewHolder holder, int position) {
+                Task item = mData.get(position);
         holder.applicationName
-                .setText(applications.get(position).application_name);
+                .setText(item.getTitle());
+
+        holder.applicationLocation
+                .setText(item.getLocation());
+
+        holder.applicationDate
+                .setText(item.getDate());
         holder.applicationStatus
-                .setText(applications.get(position).application_status);
+                .setText("Stage: " +Utility.getStage(item.getStatus()));
+        if (item.getStatus() == 6 || item.getStatus() == 1){
+            holder.container.setBackgroundColor(mContext.getResources().getColor(R.color.colorRed));
+        }
+        else if (item.getStatus() == 5){
+            holder.container.setBackgroundColor(mContext.getResources().getColor(R.color.colorGreen));
+        }
+    }
+
+    void setData(List<Task> data){
+        mData = data;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return applications.size();
+        return mData!=null?mData.size(): 0;
     }
 
     static class ApplicationViewHolder extends RecyclerView.ViewHolder {
 
-        final CardView cardView;
-        final TextView applicationName;
-        final TextView applicationStatus;
+        TextView applicationName;
+        TextView applicationLocation;
+        TextView applicationDate;
+        TextView applicationStatus;
+        LinearLayout container;
 
         ApplicationViewHolder(@NonNull View itemView) {
             super(itemView);
-            cardView = itemView.findViewById(R.id.card_view_item);
-            applicationName = itemView.findViewById(R.id.application_nam);
+            applicationName = itemView.findViewById(R.id.title);
+            applicationLocation = itemView.findViewById(R.id.location);
+            applicationDate = itemView.findViewById(R.id.date);
             applicationStatus = itemView.findViewById(R.id.application_status);
+            container = itemView.findViewById(R.id.container);
         }
     }
 
