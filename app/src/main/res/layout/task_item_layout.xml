@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:id="@+id/container">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp"
+        tools:text="Android Developer"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_location_on_black_24dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        tools:text="California" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_date_range_black_24dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        tools:text="Created 23/01/2019" />
+
+    <TextView
+        android:id="@+id/application_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        tools:text="Completed" />
+
+
+</LinearLayout>

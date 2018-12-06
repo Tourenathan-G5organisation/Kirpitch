@@ -14,4 +14,12 @@
 
     <string name="navigation_drawer_l_open">Open navigation drawer</string>
     <string name="navigation_drawer_l_close">Close navigation drawer</string>
+    <string name="title_activity_detail">DetailActivity</string>
+
+    <string name="location">Location</string>
+    <string name="company">Company</string>
+    <string name="stage">Stage</string>
+    <string name="job_profile">Jop profile</string>
+    <string name="notification">Notification</string>
+    <string name="create">Created</string>
 </resources>

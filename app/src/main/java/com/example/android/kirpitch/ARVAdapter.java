@@ -1,6 +1,5 @@
 package com.example.android.kirpitch;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewHolder> {
 
     private List<Task> mData;
-    Context mContext;
+    MainActivity mContext;
 
-    ARVAdapter(Context context) {
+    ARVAdapter(MainActivity context) {
         mContext = context;
     }
 
@@ -63,7 +62,7 @@ public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewH
         return mData!=null?mData.size(): 0;
     }
 
-    static class ApplicationViewHolder extends RecyclerView.ViewHolder {
+    class ApplicationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView applicationName;
         TextView applicationLocation;
@@ -78,6 +77,13 @@ public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewH
             applicationDate = itemView.findViewById(R.id.date);
             applicationStatus = itemView.findViewById(R.id.application_status);
             container = itemView.findViewById(R.id.container);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            mContext.onClick(position);
         }
     }
 
