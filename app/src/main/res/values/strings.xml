@@ -22,4 +22,14 @@
     <string name="job_profile">Jop profile</string>
     <string name="notification">Notification</string>
     <string name="create">Created</string>
+
+    <string-array name="array_item">
+        <item>Draft</item>
+        <item>Send</item>
+        <item>Interview</item>
+        <item>Cancel</item>
+        <item>Completed</item>
+    </string-array>
+
+    <string name="done">done</string>
 </resources>

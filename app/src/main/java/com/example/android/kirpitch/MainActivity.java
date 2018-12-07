@@ -9,7 +9,6 @@ import android.view.View;
 import com.example.android.kirpitch.model.Task;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -49,9 +48,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar
-                        .make(v, "Your action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+              Intent intent = new Intent(MainActivity.this, NewTaskActivity.class);
+              startActivity(intent);
             }
         });
 
@@ -62,11 +60,7 @@ public class MainActivity extends AppCompatActivity
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user == null) {
-                    // user sign out
 
-                    /*startActivity(new Intent(getApplicationContext()
-                            , LoginActivity.class));
-                    finish();*/
                     startActivityForResult(
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()

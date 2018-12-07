@@ -7,6 +7,8 @@ public class Task {
     String location;
     String date;
     int status;
+    String otherInfo;
+    String link;
 
     public Task(String title, String location, String date, int status) {
         this.title = title;
