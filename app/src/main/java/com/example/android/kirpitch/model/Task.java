@@ -2,16 +2,30 @@ package com.example.android.kirpitch.model;
 
 public class Task {
 
-    String title;
-    String companyName;
-    String location;
-    String date;
-    int status;
-    String otherInfo;
-    String link;
+    private String title;
+    private String companyName;
+    private String location;
+   private long date;
+    private int status;
+    private String otherInfo;
+    private String link;
 
-    public Task(String title, String location, String date, int status) {
+    public Task() {
+    }
+
+    public Task(String title, String companyName, String location, long date, int status, String otherInfo, String link) {
         this.title = title;
+        this.companyName = companyName;
+        this.location = location;
+        this.date = date;
+        this.status = status;
+        this.otherInfo = otherInfo;
+        this.link = link;
+    }
+
+    public Task(String title, String companyName, String location, long date, int status) {
+        this.title = title;
+        this.companyName = companyName;
         this.location = location;
         this.date = date;
         this.status = status;
@@ -33,11 +47,11 @@ public class Task {
         this.location = location;
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(long date) {
         this.date = date;
     }
 

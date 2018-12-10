@@ -2,5 +2,5 @@ package com.example.android.kirpitch;
 
 public interface ItemOnClickHandler {
 
-    void onClick(int position);
+    void onClick(String key);
 }

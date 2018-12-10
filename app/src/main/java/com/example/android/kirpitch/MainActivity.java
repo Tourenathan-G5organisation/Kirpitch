@@ -5,14 +5,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.android.kirpitch.model.Task;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,6 +40,15 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private List<Task> applications;
 
+    // Write a message to the database
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    ChildEventListener mChildEventListener;
+
+    ARVAdapter mAdapter;
+
+    TextView noTaskTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +62,18 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent = new Intent(MainActivity.this, NewTaskActivity.class);
-              startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, NewTaskActivity.class);
+                startActivity(intent);
             }
         });
+        noTaskTextView = findViewById(R.id.no_task_textview);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
+
+        database = FirebaseDatabase.getInstance();
+        database.setPersistenceEnabled(true);
+
+        myRef = database.getReference().child("task/"+ mFirebaseAuth.getCurrentUser().getUid());
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -82,35 +102,57 @@ public class MainActivity extends AppCompatActivity
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        initializeData();
         initializeAdapter();
 
-    }
+        mChildEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                if (mAdapter != null) {
+                    Task task = dataSnapshot.getValue(Task.class);
+                    mAdapter.addDataItem(task);
+                    mAdapter.addKey(dataSnapshot.getKey());
+                    noTaskTextView.setVisibility(View.GONE);
+                }
 
+            }
 
-    private void initializeData() {
-        applications = new ArrayList<>();
-        applications
-                .add(new Task("Software Engineer at Microsoft", "Moscow, Russia", "20/11/2018", 0));
-        applications
-                .add(new Task("Android Developer at Yandex", "Belin, Germany", "20/11/2018", 1));
-        applications
-                .add(new Task("QA Engineer at MTN Cameroon", "Douala, Cameroon", "20/11/2018", 2));
-        applications
-                .add(new Task("Android Developer at EPAM", "Moscow, Russia", "20/11/2018", 3));
-        applications
-                .add(new Task("ML Engineer at Skytech", "Accra, Ghana", "20/11/2018", 4));
-        applications
-                .add(new Task("Android Developer at Google", "Bay Area, California", "20/11/2018", 5));
-        applications
-                .add(new Task("Telecom Engineer at Vodafone", "Algeria", "20/11/2018", 0));
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                if (mAdapter != null) {
+                    Task task = dataSnapshot.getValue(Task.class);
+                    mAdapter.removeDataItem(task);
+                    mAdapter.removeKey(dataSnapshot.getKey());
+
+                    if (mAdapter.getDataCount() == 0){
+                        noTaskTextView.setVisibility(View.VISIBLE);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        myRef.addChildEventListener(mChildEventListener);
 
     }
 
     private void initializeAdapter() {
-        ARVAdapter adapter = new ARVAdapter(this);
-        adapter.setData(applications);
-        recyclerView.setAdapter(adapter);
+        mAdapter = new ARVAdapter(this);
+        recyclerView.setAdapter(mAdapter);
         //recyclerView.setItemAnimator(dividerItemDecoration);
     }
 
@@ -157,9 +199,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onClick(int position) {
+    public void onClick(String key) {
         Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(Intent.EXTRA_TEXT, key);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myRef.removeEventListener(mChildEventListener);
     }
 }
 

@@ -25,11 +25,14 @@
 
     <string-array name="array_item">
         <item>Draft</item>
-        <item>Send</item>
-        <item>Interview</item>
         <item>Cancel</item>
+        <item>Application Send</item>
+        <item>Interview</item>
+        <item>Technical Interview</item>
         <item>Completed</item>
+        <item>Closed</item>
     </string-array>
 
     <string name="done">done</string>
+    <string name="no_task">No task available\nClick on \'+\' to create one</string>
 </resources>

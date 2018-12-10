@@ -8,7 +8,10 @@ import android.widget.TextView;
 
 import com.example.android.kirpitch.model.Task;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,10 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewHolder> {
 
     private List<Task> mData;
-    MainActivity mContext;
+    private MainActivity mContext;
+    private List<String> keys;
 
     ARVAdapter(MainActivity context) {
         mContext = context;
+        mData = new ArrayList<>();
+        keys = new ArrayList<>();
     }
 
 
@@ -33,33 +39,57 @@ public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewH
 
     @Override
     public void onBindViewHolder(@NonNull ApplicationViewHolder holder, int position) {
-                Task item = mData.get(position);
+        Task item = mData.get(position);
         holder.applicationName
-                .setText(item.getTitle());
+                .setText(item.getTitle() + " at " + item.getCompanyName());
 
         holder.applicationLocation
                 .setText(item.getLocation());
 
+        Calendar currentDate = Calendar.getInstance();
+        currentDate.setTimeInMillis(item.getDate());
         holder.applicationDate
-                .setText(item.getDate());
+                .setText(
+                        String.format(Locale.getDefault(), "%02d %s %d", currentDate.get(Calendar.DAY_OF_MONTH),  currentDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()), currentDate.get(Calendar.YEAR)));
         holder.applicationStatus
-                .setText("Stage: " +Utility.getStage(item.getStatus()));
-        if (item.getStatus() == 6 || item.getStatus() == 1){
+                .setText("Stage: " + Utility.getStage(item.getStatus()));
+        if (item.getStatus() == 6 || item.getStatus() == 1) {
             holder.container.setBackgroundColor(mContext.getResources().getColor(R.color.colorRed));
-        }
-        else if (item.getStatus() == 5){
+        } else if (item.getStatus() == 5) {
             holder.container.setBackgroundColor(mContext.getResources().getColor(R.color.colorGreen));
         }
     }
 
-    void setData(List<Task> data){
+    void setData(List<Task> data) {
         mData = data;
         notifyDataSetChanged();
     }
 
+    void addDataItem(Task dataItem) {
+        mData.add(dataItem);
+        notifyDataSetChanged();
+    }
+
+    void addKey(String dataKey) {
+        keys.add(dataKey);
+    }
+
+    void removeDataItem(Task dataItem) {
+        mData.remove(dataItem);
+        notifyDataSetChanged();
+    }
+
+    void removeKey(String dataKey) {
+        keys.remove(dataKey);
+    }
+
+    int getDataCount(){
+        return mData != null ? mData.size() : 0;
+    }
+
     @Override
     public int getItemCount() {
-        return mData!=null?mData.size(): 0;
+        return mData != null ? mData.size() : 0;
     }
 
     class ApplicationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -83,7 +113,7 @@ public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewH
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            mContext.onClick(position);
+            mContext.onClick(keys.get(position));
         }
     }
 

@@ -51,9 +51,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="23"
+                tools:text="23"
                 android:textSize="48sp"
-                android:paddingEnd="5dp" />
+                android:paddingEnd="5dp"
+                android:id="@+id/day"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,15 +65,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sunday"
-                    android:textSize="16sp" />
+                    tools:text="Sunday"
+                    android:textSize="16sp"
+                    android:id="@+id/week_day"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sept 2018"
+                    tools:text="Sept 2018"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:id="@+id/month_year"/>
 
             </LinearLayout>
 
@@ -93,12 +96,13 @@
                 android:text="@string/job_profile" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textStyle="bold"
-                android:text="Backend Developer"
-                android:textSize="20sp" />
+                tools:text="Backend Developer"
+                android:textSize="20sp"
+                android:id="@+id/job_profile_name"/>
         </LinearLayout>
 
         <LinearLayout
@@ -115,12 +119,13 @@
                 android:text="@string/company" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Yandex"
+                tools:text="Yandex"
                 android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:id="@+id/company_name"/>
         </LinearLayout>
 
         <LinearLayout
@@ -136,12 +141,13 @@
                 android:text="@string/location" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textStyle="bold"
-                android:text="Moscow"
-                android:textSize="20sp" />
+                tools:text="Moscow"
+                android:textSize="20sp"
+                android:id="@+id/location_name"/>
         </LinearLayout>
 
         <LinearLayout
@@ -157,12 +163,13 @@
                 android:text="@string/stage" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Interview"
+                tools:text="Interview"
                 android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:id="@+id/stage_name"/>
         </LinearLayout>
 
         <LinearLayout
@@ -181,14 +188,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="5 DEC 2018"
+                tools:text="5 DEC 2018"
                 android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="10:50 am"
+                tools:text="10:50 am"
                 android:textSize="18sp" />
 
         </LinearLayout>
