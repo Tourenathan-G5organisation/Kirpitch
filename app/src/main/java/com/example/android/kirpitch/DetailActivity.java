@@ -91,7 +91,14 @@ public class DetailActivity extends AppCompatActivity {
             onBackPressed();
         } else if (id == R.id.action_edit_task) {
             Intent intent = new Intent(this, NewTaskActivity.class);
+            intent.putExtra("edit", true);
+            intent.putExtra(Intent.EXTRA_TEXT, key);
             startActivity(intent);
+            return true;
+        } else if (id == R.id.action_delete_task) {
+            myRef.removeValue();
+            onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -103,16 +110,18 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     void setText() {
-        jobProfile.setText(mTask.getTitle());
-        companyName.setText(mTask.getCompanyName());
-        locationName.setText(mTask.getLocation());
-        statusName.setText(Utility.getStage(mTask.getStatus()));
-        Calendar currentDate = Calendar.getInstance();
-        currentDate.setTimeInMillis(mTask.getDate());
-        day.setText(String.valueOf(currentDate.get(Calendar.DAY_OF_MONTH)));
-        weekday.setText(currentDate.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
-        monthAndYear.setText(String.format("%s %d", currentDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()), currentDate.get(Calendar.YEAR)));
+        if (mTask != null) {
+            jobProfile.setText(mTask.getTitle());
+            companyName.setText(mTask.getCompanyName());
+            locationName.setText(mTask.getLocation());
+            statusName.setText(Utility.getStage(mTask.getStatus()));
+            Calendar currentDate = Calendar.getInstance();
+            currentDate.setTimeInMillis(mTask.getDate());
+            day.setText(String.valueOf(currentDate.get(Calendar.DAY_OF_MONTH)));
+            weekday.setText(currentDate.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
+            monthAndYear.setText(String.format("%s %d", currentDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()), currentDate.get(Calendar.YEAR)));
 
+        }
     }
 
     @Override

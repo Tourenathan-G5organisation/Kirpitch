@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if (mAdapter != null) {
                     Task task = dataSnapshot.getValue(Task.class);
-                    mAdapter.addDataItem(task);
                     mAdapter.addKey(dataSnapshot.getKey());
+                    mAdapter.addDataItem(dataSnapshot.getKey(), task);
                     noTaskTextView.setVisibility(View.GONE);
                 }
 
@@ -118,15 +118,18 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                if (mAdapter != null) {
+                    Task task = dataSnapshot.getValue(Task.class);
+                    mAdapter.updateItem(dataSnapshot.getKey(), task);
+                }
 
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 if (mAdapter != null) {
-                    Task task = dataSnapshot.getValue(Task.class);
-                    mAdapter.removeDataItem(task);
-                    mAdapter.removeKey(dataSnapshot.getKey());
+                    mAdapter.removeDataItem(dataSnapshot.getKey());
+
 
                     if (mAdapter.getDataCount() == 0){
                         noTaskTextView.setVisibility(View.VISIBLE);

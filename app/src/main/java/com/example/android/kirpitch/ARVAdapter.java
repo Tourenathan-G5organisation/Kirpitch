@@ -10,21 +10,23 @@ import com.example.android.kirpitch.model.Task;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewHolder> {
 
-    private List<Task> mData;
+    private Map<String, Task> mData;
     private MainActivity mContext;
     private List<String> keys;
 
     ARVAdapter(MainActivity context) {
         mContext = context;
-        mData = new ArrayList<>();
+        mData = new HashMap<>();
         keys = new ArrayList<>();
     }
 
@@ -39,7 +41,7 @@ public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewH
 
     @Override
     public void onBindViewHolder(@NonNull ApplicationViewHolder holder, int position) {
-        Task item = mData.get(position);
+        Task item = mData.get(keys.get(position));
         holder.applicationName
                 .setText(item.getTitle() + " at " + item.getCompanyName());
 
@@ -60,13 +62,13 @@ public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewH
         }
     }
 
-    void setData(List<Task> data) {
+    void setData(HashMap data) {
         mData = data;
         notifyDataSetChanged();
     }
 
-    void addDataItem(Task dataItem) {
-        mData.add(dataItem);
+    void addDataItem(String key, Task dataItem) {
+        mData.put(key, dataItem);
         notifyDataSetChanged();
     }
 
@@ -74,13 +76,19 @@ public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewH
         keys.add(dataKey);
     }
 
-    void removeDataItem(Task dataItem) {
-        mData.remove(dataItem);
+    void removeDataItem(String key) {
+        mData.remove(key);
+        keys.remove(key);
         notifyDataSetChanged();
     }
 
-    void removeKey(String dataKey) {
+    private void removeKey(String dataKey) {
         keys.remove(dataKey);
+    }
+
+    void updateItem(String key, Task newTask){
+        mData.put(key, newTask);
+        notifyDataSetChanged();
     }
 
     int getDataCount(){

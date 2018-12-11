@@ -34,5 +34,6 @@
     </string-array>
 
     <string name="done">done</string>
+    <string name="delete">delete</string>
     <string name="no_task">No task available\nClick on \'+\' to create one</string>
 </resources>
