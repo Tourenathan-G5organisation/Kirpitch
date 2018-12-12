@@ -2,6 +2,7 @@ package com.example.android.kirpitch;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -73,13 +74,18 @@ public class MainActivity extends AppCompatActivity
         database = FirebaseDatabase.getInstance();
         database.setPersistenceEnabled(true);
 
-        myRef = database.getReference().child("task/"+ mFirebaseAuth.getCurrentUser().getUid());
+        if (mFirebaseAuth.getCurrentUser() != null){
+            myRef = database.getReference().child("task/"+ mFirebaseAuth.getCurrentUser().getUid());
+            Log.d("Test", "One");
+        }
+
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user == null) {
+                    Log.d("Test", "Logout");
 
                     startActivityForResult(
                             AuthUI.getInstance()
@@ -90,6 +96,11 @@ public class MainActivity extends AppCompatActivity
                                             new AuthUI.IdpConfig.GoogleBuilder().build()))
                                     .build(),
                             RC_SIGN_IN);
+                }
+                else {
+                    myRef = database.getReference().child("task/"+ mFirebaseAuth.getCurrentUser().getUid());
+                    myRef.addChildEventListener(mChildEventListener);
+                    Log.d("Test", "Login");
                 }
             }
         };
@@ -109,9 +120,9 @@ public class MainActivity extends AppCompatActivity
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if (mAdapter != null) {
                     Task task = dataSnapshot.getValue(Task.class);
-                    mAdapter.addKey(dataSnapshot.getKey());
                     mAdapter.addDataItem(dataSnapshot.getKey(), task);
                     noTaskTextView.setVisibility(View.GONE);
+
                 }
 
             }
@@ -149,7 +160,10 @@ public class MainActivity extends AppCompatActivity
             }
         };
 
-        myRef.addChildEventListener(mChildEventListener);
+        if (mFirebaseAuth.getCurrentUser() != null){
+            myRef.addChildEventListener(mChildEventListener);
+        }
+
 
     }
 

@@ -28,6 +28,7 @@ public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewH
         mContext = context;
         mData = new HashMap<>();
         keys = new ArrayList<>();
+        setHasStableIds(true);
     }
 
 
@@ -52,7 +53,9 @@ public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewH
         currentDate.setTimeInMillis(item.getDate());
         holder.applicationDate
                 .setText(
-                        String.format(Locale.getDefault(), "%02d %s %d", currentDate.get(Calendar.DAY_OF_MONTH),  currentDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()), currentDate.get(Calendar.YEAR)));
+                        String.format(Locale.getDefault(), "%02d %s %d", currentDate.get(Calendar.DAY_OF_MONTH),
+                                currentDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()),
+                                currentDate.get(Calendar.YEAR)));
         holder.applicationStatus
                 .setText("Stage: " + Utility.getStage(item.getStatus()));
         if (item.getStatus() == 6 || item.getStatus() == 1) {
@@ -62,17 +65,13 @@ public class ARVAdapter extends RecyclerView.Adapter<ARVAdapter.ApplicationViewH
         }
     }
 
-    void setData(HashMap data) {
-        mData = data;
-        notifyDataSetChanged();
-    }
-
     void addDataItem(String key, Task dataItem) {
         mData.put(key, dataItem);
+        keys.add(key);
         notifyDataSetChanged();
     }
 
-    void addKey(String dataKey) {
+    private void addKey(String dataKey) {
         keys.add(dataKey);
     }
 
